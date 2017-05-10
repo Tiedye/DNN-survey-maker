@@ -1,3 +1,144 @@
-<h1>
-  {{title}}
-</h1>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1>Survey Creator <small>Designed for DNN</small></h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col pb-3">
+      <h2>Specify Questions</h2>
+    </div>
+  </div>
+</div>
+<div class="container" style="position: relative;">
+  <div class="row pb-3" style="position: sticky; top: -10px; z-index: 100;">
+    <div class="col">
+      <div class="card">
+        <div class="card-block d-flex justify-content-between">
+          <div>
+            <span class="btn btn-sm btn-outline"><i class="fa fa-plus"></i></span>
+            <button class="btn btn-sm btn-primary" (click)="addChoiceQ()"><i class="fa fa-check-square-o"></i></button>
+            <button class="btn btn-sm btn-primary" (click)="addTextQ()"><i class="fa fa-font"></i></button>
+            <button class="btn btn-sm btn-primary" (click)="addNumberQ()"><i class="fa fa-hashtag"></i></button>
+            <button class="btn btn-sm btn-primary" (click)="addDateQ()"><i class="fa fa-calendar"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" id="question-bag" dragula="question-bag">
+    <ng-template ngFor let-question [ngForOf]="questions" let-i="index">
+      <div class="col-12 pb-3">
+        <surv-question-block [question]="question" (deleted)="questions.splice(i, 1)">
+        </surv-question-block>
+      </div>
+    </ng-template>
+  </div>
+  <div id="end-question-bag"></div>
+</div>
+<div class="container">
+  <h2>Specify Ouputs</h2>
+</div>
+<div class="container" style="position: relative;">
+  <div class="row pb-3" style="position: sticky; top: -10px; z-index: 100;">
+    <div class="col">
+      <div class="card">
+        <div class="card-block d-flex justify-content-between">
+          <div>
+            <span class="btn btn-sm btn-outline"><i class="fa fa-plus"></i></span>
+            <button class="btn btn-sm btn-primary" (click)="addBasicO()"><i class="fa fa-puzzle-piece"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" dragula="node-bag">
+    <ng-template ngFor let-node [ngForOf]="outputs" let-i="index">
+      <div class="col-12 pb-3">
+        <surv-node-block [node]="node" (deleted)="outputs.splice(i, 1)">
+        </surv-node-block>
+      </div>
+    </ng-template>
+  </div>
+</div>
+<div class="container">
+  <div class="col">
+    <button class="btn btn-primary" (click)="compile()">Compile</button>
+  </div>
+</div>
+<div class="pt-5" *ngIf="outHTML">
+  <div class="container">
+    <pre><code>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;module type="DNNHTML" version="09.00.02"&gt;
+   &lt;contentKey /&gt;
+   &lt;moduleID&gt;441&lt;/moduleID&gt;
+   &lt;alignment /&gt;
+   &lt;alltabs&gt;false&lt;/alltabs&gt;
+   &lt;border /&gt;
+   &lt;cachemethod&gt;MemoryModuleCachingProvider&lt;/cachemethod&gt;
+   &lt;cachetime&gt;1200&lt;/cachetime&gt;
+   &lt;color /&gt;
+   &lt;containersrc /&gt;
+   &lt;displayprint&gt;false&lt;/displayprint&gt;
+   &lt;displaysyndicate&gt;false&lt;/displaysyndicate&gt;
+   &lt;displaytitle&gt;false&lt;/displaytitle&gt;
+   &lt;enddate&gt;0001-01-01T00:00:00&lt;/enddate&gt;
+   &lt;footer&gt;{{outScript}}&lt;/footer&gt;
+   &lt;header&gt;{{outStyle}}&lt;/header&gt;
+   &lt;iconfile /&gt;
+   &lt;inheritviewpermissions&gt;true&lt;/inheritviewpermissions&gt;
+   &lt;iswebslice&gt;false&lt;/iswebslice&gt;
+   &lt;modulepermissions&gt;
+      &lt;permission&gt;
+         &lt;permissioncode&gt;SYSTEM_MODULE_DEFINITION&lt;/permissioncode&gt;
+         &lt;permissionkey&gt;EDIT&lt;/permissionkey&gt;
+         &lt;allowaccess&gt;true&lt;/allowaccess&gt;
+         &lt;rolename&gt;Administrators&lt;/rolename&gt;
+      &lt;/permission&gt;
+   &lt;/modulepermissions&gt;
+   &lt;title&gt;Dynamic Questionairre&lt;/title&gt;
+   &lt;startdate&gt;0001-01-01T00:00:00&lt;/startdate&gt;
+   &lt;uniqueId&gt;7710185a-b4bb-437b-95f1-71b4b3d6e8e5&lt;/uniqueId&gt;
+   &lt;visibility&gt;Maximized&lt;/visibility&gt;
+   &lt;websliceexpirydate&gt;0001-01-01T00:00:00&lt;/websliceexpirydate&gt;
+   &lt;webslicettl&gt;0&lt;/webslicettl&gt;
+   &lt;cultureCode /&gt;
+   &lt;content type="DNNHTML" version="09.00.02"&gt;&lt;![CDATA[&amp;lt;htmltext&amp;gt;&amp;lt;content&amp;gt;&amp;lt;![CDATA[{{outHTML}}]]&amp;gt;&amp;lt;/content&amp;gt;&amp;lt;/htmltext&amp;gt;]]&gt;&lt;/content&gt;
+   &lt;modulesettings&gt;
+      &lt;modulesetting&gt;
+         &lt;settingname&gt;HtmlText_ReplaceTokens&lt;/settingname&gt;
+         &lt;settingvalue&gt;False&lt;/settingvalue&gt;
+      &lt;/modulesetting&gt;
+      &lt;modulesetting&gt;
+         &lt;settingname&gt;HtmlText_UseDecorate&lt;/settingname&gt;
+         &lt;settingvalue&gt;True&lt;/settingvalue&gt;
+      &lt;/modulesetting&gt;
+      &lt;modulesetting&gt;
+         &lt;settingname&gt;AllowIndex&lt;/settingname&gt;
+         &lt;settingvalue&gt;True&lt;/settingvalue&gt;
+      &lt;/modulesetting&gt;
+      &lt;modulesetting&gt;
+         &lt;settingname&gt;HtmlText_SearchDescLength&lt;/settingname&gt;
+         &lt;settingvalue&gt;100&lt;/settingvalue&gt;
+      &lt;/modulesetting&gt;
+      &lt;modulesetting&gt;
+         &lt;settingname&gt;WorkFlowID&lt;/settingname&gt;
+         &lt;settingvalue&gt;1&lt;/settingvalue&gt;
+      &lt;/modulesetting&gt;
+   &lt;/modulesettings&gt;
+   &lt;tabmodulesettings&gt;
+      &lt;tabmodulesetting&gt;
+         &lt;settingname&gt;AllowIndex&lt;/settingname&gt;
+         &lt;settingvalue&gt;True&lt;/settingvalue&gt;
+      &lt;/tabmodulesetting&gt;
+   &lt;/tabmodulesettings&gt;
+   &lt;definition&gt;DNN_HTML&lt;/definition&gt;
+   &lt;moduledefinition&gt;Text/HTML&lt;/moduledefinition&gt;
+&lt;/module&gt;
+    </code></pre>
+  </div>
+</div>
+<div style="padding-bottom: 300px;">
+</div>
+
