@@ -9,12 +9,14 @@ import { QuestionBlockComponent } from './question-block/question-block.componen
 import { NodeBlockComponent } from './node-block/node-block.component';
 
 import { CompileService } from './compile.service';
+import { ConditionComponent } from './condition/condition.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     QuestionBlockComponent,
-    NodeBlockComponent
+    NodeBlockComponent,
+    ConditionComponent
   ],
   imports: [
     BrowserModule,

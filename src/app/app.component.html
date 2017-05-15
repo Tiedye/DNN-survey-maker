@@ -62,10 +62,26 @@
   </div>
 </div>
 <div class="container">
-  <div class="col">
-    <button class="btn btn-primary" (click)="compile()">Compile</button>
+  <div class="row">
+    <div class="col">
+      <button class="btn btn-primary" (click)="compile()">Compile</button>
+    </div>
   </div>
 </div>
+<!--<div class="container">
+  <div class="row">
+    <div class="col">
+      <textarea class="form-control" [(ngModel)]="outHTML"></textarea>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <textarea class="form-control" [(ngModel)]="outScript"></textarea>
+    </div>
+  </div>
+</div>-->
 <div class="pt-5" *ngIf="outHTML">
   <div class="container">
     <pre><code>

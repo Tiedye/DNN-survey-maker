@@ -61,7 +61,8 @@ export class AppComponent {
 
   compile():void {
     let result = this.compileService.compile(this.questions, this.outputs);
-    this.outHTML = result.html.replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/&/g, '&amp;');
+    this.outHTML = result.html;//result.html.replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/&/g, '&amp;');
+    this.outScript = result.script;
     console.log(this.outHTML);
   }
 
