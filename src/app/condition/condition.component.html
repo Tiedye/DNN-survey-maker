@@ -1,3 +1,72 @@
-<p>
-  condition works!
-</p>
+    <ng-template [ngIf]="condition === null">
+      <div class="row">
+        <div class="col">
+          <button class="btn btn-default" (click)="addCondition()">Add Condition</button>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template [ngIf]="condition !== null">
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label">Question ID:</label>
+        <div class="col-md-10"><input type="text" class="form-control" [(ngModel)]="condition.questionId"></div>
+      </div>
+      <div class="form-group row">
+        <div class="col">
+        <label class="custom-control custom-radio">
+          <input type="radio" [attr.name]="selectId" class="custom-control-input" value="eq" [(ngModel)]="condition.comparator">
+          <span class="custom-control-indicator"></span>
+          <span class="custom-control-description">=</span>
+        </label>
+        <label class="custom-control custom-radio">
+          <input type="radio" [attr.name]="selectId" class="custom-control-input" value="ne" [(ngModel)]="condition.comparator">
+          <span class="custom-control-indicator"></span>
+          <span class="custom-control-description">&ne;</span>
+        </label>
+        <label class="custom-control custom-radio">
+          <input type="radio" [attr.name]="selectId" class="custom-control-input" value="lt" [(ngModel)]="condition.comparator">
+          <span class="custom-control-indicator"></span>
+          <span class="custom-control-description">&lt;</span>
+        </label>
+        <label class="custom-control custom-radio">
+          <input type="radio" [attr.name]="selectId" class="custom-control-input" value="gt" [(ngModel)]="condition.comparator">
+          <span class="custom-control-indicator"></span>
+          <span class="custom-control-description">&gt;</span>
+        </label>
+        <label class="custom-control custom-radio">
+          <input type="radio" [attr.name]="selectId" class="custom-control-input" value="lte" [(ngModel)]="condition.comparator">
+          <span class="custom-control-indicator"></span>
+          <span class="custom-control-description">&le;</span>
+        </label>
+        <label class="custom-control custom-radio">
+          <input type="radio" [attr.name]="selectId" class="custom-control-input" value="gte" [(ngModel)]="condition.comparator">
+          <span class="custom-control-indicator"></span>
+          <span class="custom-control-description">&ge;</span>
+        </label>
+        <label class="custom-control custom-radio">
+          <input type="radio" [attr.name]="selectId" class="custom-control-input" value="range" [(ngModel)]="condition.comparator">
+          <span class="custom-control-indicator"></span>
+          <span class="custom-control-description">range</span>
+        </label>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label">Condition:</label>
+        <ng-template [ngIf]="condition.comparator === 'range'">
+          <div class="col-md-5"><input placeholder="min" type="text" class="form-control" [(ngModel)]="condition.compareMin"></div>
+          <div class="col-md-5"><input placeholder="max" type="text" class="form-control" [(ngModel)]="condition.compareMax"></div>
+        </ng-template>
+        <ng-template  [ngIf]="condition.comparator !== 'range'">
+          <div class="col-md-10">
+            <div class="input-group">
+              <input type="text" class="form-control" [(ngModel)]="condition.compare">
+              <span class="input-group-btn"><button class="btn btn-secondary" type="button"><i class="fa fa-calendar"></i></button></span>
+            </div>
+          </div>
+        </ng-template>
+      </div>
+      <div class="row">
+        <div class="col">
+          <button class="btn btn-danger" (click)="removeCondition()">Remove Condition</button>
+        </div>
+      </div>
+    </ng-template>
