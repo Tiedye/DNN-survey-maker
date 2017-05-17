@@ -1,14 +1,18 @@
-<div class="container">
-  <div class="row">
-    <div class="col">
-      <h1>Survey Creator <small>Designed for DNN</small></h1>
-    </div>
+<nav class="navbar navbar-toggleable-sm navbar-light bg-faded">
+  <div class="container">
+    <a class="navbar-brand" href="#">
+      <img src="/assets/icon.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+      Survey Maker
+    </a>
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item"><a class="nav-link" href="#" (click)="save()">Save</a></li>
+      <li class="nav-item"><a class="nav-link" href="#" (click)="load()">Load</a></li>
+    </ul>
   </div>
-  <div class="row">
-    <div class="col pb-3">
-      <h2>Specify Questions</h2>
-    </div>
-  </div>
+</nav>
+
+<div class="container pt-3 text-uppercase">
+  <h4 style="border-bottom: 1px solid lightgrey">Specify Questions</h4>
 </div>
 <div class="container" style="position: relative;">
   <div class="row pb-3" style="position: sticky; top: -10px; z-index: 100;">
@@ -36,8 +40,8 @@
   </div>
   <div id="end-question-bag"></div>
 </div>
-<div class="container">
-  <h2>Specify Ouputs</h2>
+<div class="container pt-3 text-uppercase">
+  <h4 style="border-bottom: 1px solid lightgrey">Specify Outputs</h4>
 </div>
 <div class="container" style="position: relative;">
   <div class="row pb-3" style="position: sticky; top: -10px; z-index: 100;">
@@ -157,4 +161,4 @@
 </div>
 <div style="padding-bottom: 300px;">
 </div>
-
+<input #loadFileSelection type="file" (change)="loadFile($event)" style="display: none">

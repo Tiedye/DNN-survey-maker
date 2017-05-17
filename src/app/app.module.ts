@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { DragulaModule } from 'ng2-dragula';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { FroalaViewModule, FroalaEditorModule } from 'angular2-froala-wysiwyg';
 
 import { AppComponent } from './app.component';
 import { QuestionBlockComponent } from './question-block/question-block.component';
@@ -22,7 +24,10 @@ import { ConditionComponent } from './condition/condition.component';
     BrowserModule,
     FormsModule,
     HttpModule,
-    DragulaModule
+    DragulaModule,
+    ModalModule.forRoot(),
+    FroalaEditorModule.forRoot(),
+    FroalaViewModule.forRoot()
   ],
   providers: [CompileService],
   bootstrap: [AppComponent]

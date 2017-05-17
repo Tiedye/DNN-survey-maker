@@ -192,7 +192,7 @@ export class CompileService {
           if (item.condition !== null && !checkCondition(item.condition)) {
             rendered.set(id, '');
           } else {
-            rendered.set(id, item.content.replace(/\[([^\[\]]*)\]/g, (_, item) => renderItem(item)));
+            rendered.set(id, item.content.replace(/\\[([^\\[\\]]*)\\]/g, (_, item) => renderItem(item)));
           }
         } else if (fields.has(id)) {
           rendered.set(id, getValue('#'+id).val);
