@@ -3,14 +3,11 @@ import { GetBlankCondition } from './util';
 
 export class BasicOutput {
     type: "basic";
-    id: string;
-    static numIds = 0;
     constructor(
+        public id:string = "basic",
         public content: string = "", 
         public display: boolean = true, 
         public condition: Condition = null) {
         this.type = "basic";
-        this.id = `basic${++BasicOutput.numIds}`;
-
     }
 }

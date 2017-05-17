@@ -19,7 +19,7 @@ export class CompileService {
     script(`
     function getValue(element) {
       let elem = $(element);
-      let val = elem.find('.form-control').val();
+      let val = elem.find('.input').val();
       let type;
       if (elem.hasClass('qustn-choice')) {
         type = 'choice';
@@ -104,7 +104,7 @@ export class CompileService {
 
     function initChangeListener(id) {
       let e = $('#' + id);
-      e.on('change', '.form-control', function(event) {
+      e.on('change', '.input', function(event) {
         updateDependents(id);
       });
     }
@@ -120,14 +120,18 @@ export class CompileService {
             <div class="qustn-input">`;
     }
 
-    html(`<div id="quesitons">`)
+    html(`
+    <div class="survey">
+      <div class="container"><div class="row"><div class="col-sm-12">
+        <div id="quesitons">`)
 
     questions.forEach(q => {
       switch(q.type) {
         case 'choice':
           html(
             qHead(q, 'choice') + 
-            `<select class="form-control">
+            `<select class="input">
+            <option value="null"></option>
             ${q.choices.map(choice => `<option value="${choice.value}">${choice.name}</option>`).join("")}
             </select>
             </div>
@@ -137,7 +141,7 @@ export class CompileService {
         case 'date':
           html(
             qHead(q, 'date') + 
-            `<input class="form-control" type="date">
+            `<input class="input" type="text">
             </div>
             </div>`
           );
@@ -145,7 +149,7 @@ export class CompileService {
         case 'number':
           html(
             qHead(q, 'numder') + 
-            `<input class="form-control" type="number" min="${q.min}" max="${q.max}">          
+            `<input class="input" type="number" min="${q.min}" max="${q.max}">          
             </div>
             </div>`
           );
@@ -153,7 +157,7 @@ export class CompileService {
         case 'text':
           html(
             qHead(q, 'text') + 
-            `<input class="form-control" type="text">
+            `<input class="input" type="text">
             </div>
             </div>`
           );
@@ -173,7 +177,7 @@ export class CompileService {
     `);
 
     html(`
-    <div><button id="quesitonnaire-submit" type="submit" class="btn btn-primary">Submit</button></div>
+    <div><input id="quesitonnaire-submit" type="submit" class="btn btn-primary"><span class="text-warning" id="err"></span></div>
     `);
     html(`</div>`);
 
@@ -208,17 +212,75 @@ export class CompileService {
       $('#output').html(output);
     }
     `);
-    html(`<div id="output" class="row"><div class="col-sm-12"></div></div>`)
+    html(`<div id="output"></div>`);
+    html(`
+      </div></div></div>
+    </div>`);
     
     script(`
-    function submitQuestionnaire() {
-      $('#quesitons').hide();
-      renderOutput();
+    function checkFilled() {
+      return Array.from(fields).every(f => {
+        let block = $('#'+f);
+        let condition = block.data('condition');
+        if (condition !== undefined && !checkCondition(JSON.parse(atob(condition)))) {
+          return true;
+        } else {
+          return getValue(block).val !== 'null'
+        }
+      }); 
+    }
+
+    function submitQuestionnaire(event) {
+      event.preventDefault();
+      if (checkFilled()) {
+        $('#quesitons').hide();
+        renderOutput();
+      } else {
+        $('#err').text('You must complete the form!');
+      }
     }
     $('#quesitonnaire-submit').on('click', submitQuestionnaire);
-    `)
+    `);
 
-    return {html:htmlOutput.replace(/\s+/g, ' '), style:styleOutput, script:scriptOutput};
+    style(`
+    .survey input[type="text"], .survey input[type="date"], .survey input[type="number"], .survey textarea, .survey select {
+      width: 100%;
+      display: inline-block;
+      padding: 12px 10px;
+      background:#33383D;
+      color: #ddd;
+      font-size: 13px;
+      font-family: 'Open Sans', sans-serif;
+      border: 1px solid rgba(255,255,255,0.15);
+      outline: none;
+      margin: 0 0 20px;
+    }
+    .survey input[type="submit"] {
+      display: inline-block;
+      outline: none;
+      padding: 10px 57px;
+      font-size: 16px;
+      font-family: 'Open Sans', sans-serif;
+      font-weight: 300;
+      transition: all 0.2s ease-in-out;
+      color: #ffffff;
+        border-radius: 4px;
+      border:none;
+    }
+    .qustn-text {
+      font-size: 130%;
+      padding-bottom: 10px;
+    }
+    #output {
+      color: #ddd;
+    }
+    #output p, #output li {
+      font-size: 110%;
+      padding-bottom: 10px;
+    }
+    `);
+
+    return {html:htmlOutput.replace(/\s+/g, ' '), style:styleOutput.replace(/\s+/g, ' '), script:scriptOutput.replace(/\s+/g, ' ')};
   }
 
 }

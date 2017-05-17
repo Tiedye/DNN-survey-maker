@@ -1,0 +1,12 @@
+:host /deep/ .fr-box.fr-basic.fr-top>div:not([class]) {
+    display: none !important;
+}
+
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: white;
+    padding: 10px 0;
+}

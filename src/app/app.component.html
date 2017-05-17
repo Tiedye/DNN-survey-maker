@@ -1,16 +1,37 @@
 <nav class="navbar navbar-toggleable-sm navbar-light bg-faded">
   <div class="container">
     <a class="navbar-brand" href="#">
-      <img src="/assets/icon.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+      <img src="assets/icon.svg" width="30" height="30" class="d-inline-block align-top" alt="">
       Survey Maker
     </a>
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item"><a class="nav-link" href="#" (click)="save()">Save</a></li>
-      <li class="nav-item"><a class="nav-link" href="#" (click)="load()">Load</a></li>
+      <li class="nav-item"><a class="nav-link" (click)="save()">Save</a></li>
+      <li class="nav-item"><a class="nav-link" (click)="load()">Load</a></li>
+      <li class="nav-item"><a class="nav-link" (click)="clear()">Clear</a></li>
     </ul>
   </div>
 </nav>
 
+<div class="bottom-nav">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <select class="form-control" (change)="navto($event.target.value)">
+          <option>- QUESITONS -</option>
+          <option *ngFor="let quesiton of questions">{{quesiton.id}}</option>
+        </select>
+      </div>
+      <div class="col">
+        <select class="form-control" (change)="navto($event.target.value)">
+          <option>- OUTPUTS -</option>
+          <option *ngFor="let output of outputs">{{output.id}}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="background-color: #fff6e5">
 <div class="container pt-3 text-uppercase">
   <h4 style="border-bottom: 1px solid lightgrey">Specify Questions</h4>
 </div>
@@ -19,12 +40,16 @@
     <div class="col">
       <div class="card">
         <div class="card-block d-flex justify-content-between">
-          <div>
+          <div class="mr-auto">
             <span class="btn btn-sm btn-outline"><i class="fa fa-plus"></i></span>
             <button class="btn btn-sm btn-primary" (click)="addChoiceQ()"><i class="fa fa-check-square-o"></i></button>
             <button class="btn btn-sm btn-primary" (click)="addTextQ()"><i class="fa fa-font"></i></button>
             <button class="btn btn-sm btn-primary" (click)="addNumberQ()"><i class="fa fa-hashtag"></i></button>
             <button class="btn btn-sm btn-primary" (click)="addDateQ()"><i class="fa fa-calendar"></i></button>
+          </div>
+          <div style="line-height:28px;">
+            <a (click)="save()">Save</a> | 
+            <a (click)="load()">Load</a>
           </div>
         </div>
       </div>
@@ -32,7 +57,7 @@
   </div>
   <div class="row" id="question-bag" dragula="question-bag">
     <ng-template ngFor let-question [ngForOf]="questions" let-i="index">
-      <div class="col-12 pb-3">
+      <div class="col-12 pb-3" [attr.data-id]="question.id">
         <surv-question-block [question]="question" (deleted)="questions.splice(i, 1)">
         </surv-question-block>
       </div>
@@ -40,6 +65,9 @@
   </div>
   <div id="end-question-bag"></div>
 </div>
+</div>
+
+<div style="background-color: #e5fffd">
 <div class="container pt-3 text-uppercase">
   <h4 style="border-bottom: 1px solid lightgrey">Specify Outputs</h4>
 </div>
@@ -48,9 +76,13 @@
     <div class="col">
       <div class="card">
         <div class="card-block d-flex justify-content-between">
-          <div>
+          <div class="mr-auto">
             <span class="btn btn-sm btn-outline"><i class="fa fa-plus"></i></span>
             <button class="btn btn-sm btn-primary" (click)="addBasicO()"><i class="fa fa-puzzle-piece"></i></button>
+          </div>
+          <div style="line-height:28px;">
+            <a (click)="save()">Save</a> | 
+            <a (click)="load()">Load</a>
           </div>
         </div>
       </div>
@@ -58,14 +90,15 @@
   </div>
   <div class="row" dragula="node-bag">
     <ng-template ngFor let-node [ngForOf]="outputs" let-i="index">
-      <div class="col-12 pb-3">
+      <div class="col-12 pb-3" [attr.data-id]="node.id">
         <surv-node-block [node]="node" (deleted)="outputs.splice(i, 1)">
         </surv-node-block>
       </div>
     </ng-template>
   </div>
 </div>
-<div class="container">
+</div>
+<div class="container py-3">
   <div class="row">
     <div class="col">
       <button class="btn btn-primary" (click)="compile()">Compile</button>
@@ -88,7 +121,7 @@
 </div>-->
 <div class="pt-5" *ngIf="outHTML">
   <div class="container">
-    <pre><code>
+    <pre><code #outputElement>
 &lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;module type="DNNHTML" version="09.00.02"&gt;
    &lt;contentKey /&gt;
@@ -104,8 +137,8 @@
    &lt;displaysyndicate&gt;false&lt;/displaysyndicate&gt;
    &lt;displaytitle&gt;false&lt;/displaytitle&gt;
    &lt;enddate&gt;0001-01-01T00:00:00&lt;/enddate&gt;
-   &lt;footer&gt;{{outScript}}&lt;/footer&gt;
-   &lt;header&gt;{{outStyle}}&lt;/header&gt;
+   &lt;footer&gt;&amp;lt;script&amp;gt;{{outScript}}&amp;lt;/script&amp;gt;&lt;/footer&gt;
+   &lt;header&gt;&amp;lt;style&amp;gt;{{outStyle}}&amp;lt;/style&amp;gt;&lt;/header&gt;
    &lt;iconfile /&gt;
    &lt;inheritviewpermissions&gt;true&lt;/inheritviewpermissions&gt;
    &lt;iswebslice&gt;false&lt;/iswebslice&gt;
