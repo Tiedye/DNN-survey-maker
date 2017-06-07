@@ -12,7 +12,9 @@ export class NodeBlockComponent implements OnInit {
 
   @Input() node: OutputNode;
   @Input() questions: Question[] = [];
-  @Output() deleted: EventEmitter<boolean> = new EventEmitter();
+  @Output() deleted: EventEmitter<void> = new EventEmitter<void>();
+
+  contentVisible = false;
 
   constructor() { }
 

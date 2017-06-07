@@ -12,41 +12,15 @@
       </div>
       <div class="form-group row">
         <div class="col">
-        <label class="custom-control custom-radio">
-          <input type="radio" [attr.name]="selectId" class="custom-control-input" value="eq" [(ngModel)]="condition.comparator">
-          <span class="custom-control-indicator"></span>
-          <span class="custom-control-description">=</span>
-        </label>
-        <label class="custom-control custom-radio">
-          <input type="radio" [attr.name]="selectId" class="custom-control-input" value="ne" [(ngModel)]="condition.comparator">
-          <span class="custom-control-indicator"></span>
-          <span class="custom-control-description">&ne;</span>
-        </label>
-        <label class="custom-control custom-radio">
-          <input type="radio" [attr.name]="selectId" class="custom-control-input" value="lt" [(ngModel)]="condition.comparator">
-          <span class="custom-control-indicator"></span>
-          <span class="custom-control-description">&lt;</span>
-        </label>
-        <label class="custom-control custom-radio">
-          <input type="radio" [attr.name]="selectId" class="custom-control-input" value="gt" [(ngModel)]="condition.comparator">
-          <span class="custom-control-indicator"></span>
-          <span class="custom-control-description">&gt;</span>
-        </label>
-        <label class="custom-control custom-radio">
-          <input type="radio" [attr.name]="selectId" class="custom-control-input" value="lte" [(ngModel)]="condition.comparator">
-          <span class="custom-control-indicator"></span>
-          <span class="custom-control-description">&le;</span>
-        </label>
-        <label class="custom-control custom-radio">
-          <input type="radio" [attr.name]="selectId" class="custom-control-input" value="gte" [(ngModel)]="condition.comparator">
-          <span class="custom-control-indicator"></span>
-          <span class="custom-control-description">&ge;</span>
-        </label>
-        <label class="custom-control custom-radio">
-          <input type="radio" [attr.name]="selectId" class="custom-control-input" value="range" [(ngModel)]="condition.comparator">
-          <span class="custom-control-indicator"></span>
-          <span class="custom-control-description">range</span>
-        </label>
+          <div class="btn-group">
+            <label class="btn btn-primary" [(ngModel)]="condition.comparator" btnRadio="eq">=</label>
+            <label class="btn btn-primary" [(ngModel)]="condition.comparator" btnRadio="ne">&ne;</label>
+            <label class="btn btn-primary" [(ngModel)]="condition.comparator" btnRadio="lt">&lt;</label>
+            <label class="btn btn-primary" [(ngModel)]="condition.comparator" btnRadio="gt">&gt;</label>
+            <label class="btn btn-primary" [(ngModel)]="condition.comparator" btnRadio="lte">&le;</label>
+            <label class="btn btn-primary" [(ngModel)]="condition.comparator" btnRadio="gte">&ge;</label>
+            <label class="btn btn-primary" [(ngModel)]="condition.comparator" btnRadio="range">range</label>
+          </div>
         </div>
       </div>
       <div class="form-group row">

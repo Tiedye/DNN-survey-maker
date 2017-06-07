@@ -5,9 +5,9 @@
       Survey Maker
     </a>
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item"><a class="nav-link" (click)="save()">Save</a></li>
-      <li class="nav-item"><a class="nav-link" (click)="load()">Load</a></li>
-      <li class="nav-item"><a class="nav-link" (click)="clear()">Clear</a></li>
+      <li class="nav-item"><a class="nav-link" href="#" (click)="save($event)">Save</a></li>
+      <li class="nav-item"><a class="nav-link" href="#" (click)="load($event)">Load</a></li>
+      <li class="nav-item"><a class="nav-link" href="#" (click)="clear($event)">Clear</a></li>
     </ul>
   </div>
 </nav>
@@ -17,8 +17,16 @@
     <div class="row">
       <div class="col">
         <select class="form-control" (change)="navto($event.target.value)">
-          <option>- QUESITONS -</option>
-          <option *ngFor="let quesiton of questions">{{quesiton.id}}</option>
+          <option>- PAGES -</option>
+          <option *ngFor="let page of pages">{{page.title}}</option>
+        </select>
+      </div>
+      <div class="col">
+        <select class="form-control" (change)="navto($event.target.value)">
+          <option>- QUESTIONS -</option>
+          <ng-template ngFor let-page [ngForOf]="pages">
+            <option *ngFor="let question of page.questions">{{question.id}}</option>
+          </ng-template>
         </select>
       </div>
       <div class="col">
@@ -32,39 +40,42 @@
 </div>
 
 <div style="background-color: #fff6e5">
-<div class="container pt-3 text-uppercase">
-  <h4 style="border-bottom: 1px solid lightgrey">Specify Questions</h4>
-</div>
-<div class="container" style="position: relative;">
-  <div class="row pb-3" style="position: sticky; top: -10px; z-index: 100;">
-    <div class="col">
-      <div class="card">
-        <div class="card-block d-flex justify-content-between">
-          <div class="mr-auto">
-            <span class="btn btn-sm btn-outline"><i class="fa fa-plus"></i></span>
-            <button class="btn btn-sm btn-primary" (click)="addChoiceQ()"><i class="fa fa-check-square-o"></i></button>
-            <button class="btn btn-sm btn-primary" (click)="addTextQ()"><i class="fa fa-font"></i></button>
-            <button class="btn btn-sm btn-primary" (click)="addNumberQ()"><i class="fa fa-hashtag"></i></button>
-            <button class="btn btn-sm btn-primary" (click)="addDateQ()"><i class="fa fa-calendar"></i></button>
-          </div>
-          <div style="line-height:28px;">
-            <a (click)="save()">Save</a> | 
-            <a (click)="load()">Load</a>
+  <div class="container pt-3 text-uppercase">
+    <h4 style="border-bottom: 1px solid lightgrey">Specify Questions</h4>
+  </div>
+  <div class="container-fluid" style="position: relative;">
+    <div class="container pb-3" style="position: sticky; top: -10px; z-index: 100;">
+      <div class="row">
+        <div class="col">
+          <div class="card">
+            <div class="card-block d-flex justify-content-between">
+              <div class="mr-auto">
+                <span class="btn btn-sm btn-outline"><i class="fa fa-plus"></i></span>
+                <button class="btn btn-sm btn-primary" (click)="addPage()"><i class="fa fa-file-text-o"></i></button>
+                <!--<button class="btn btn-sm btn-primary" (click)="addChoiceQ()"><i class="fa fa-check-square-o"></i></button>
+                <button class="btn btn-sm btn-primary" (click)="addTextQ()"><i class="fa fa-font"></i></button>
+                <button class="btn btn-sm btn-primary" (click)="addNumberQ()"><i class="fa fa-hashtag"></i></button>
+                <button class="btn btn-sm btn-primary" (click)="addDateQ()"><i class="fa fa-calendar"></i></button>
+                <button class="btn btn-sm btn-primary"><i class="fa fa-header"></i></button>-->
+              </div>
+              <div style="line-height:28px;">
+                <a href="#" (click)="save($event)">Save</a> | 
+                <a href="#" (click)="load($event)">Load</a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
+    <div class="row" dragula="page-bag">
+      <ng-template ngFor let-page [ngForOf]="pages" let-i="index">
+        <div class="col-12 pb-3" [attr.data-id]="page.title">
+          <surv-page-block [page]="page" (deleted)="pages.splice(i, 1)">
+          </surv-page-block>
+        </div>
+      </ng-template>
+    </div>
   </div>
-  <div class="row" id="question-bag" dragula="question-bag">
-    <ng-template ngFor let-question [ngForOf]="questions" let-i="index">
-      <div class="col-12 pb-3" [attr.data-id]="question.id">
-        <surv-question-block [question]="question" (deleted)="questions.splice(i, 1)">
-        </surv-question-block>
-      </div>
-    </ng-template>
-  </div>
-  <div id="end-question-bag"></div>
-</div>
 </div>
 
 <div style="background-color: #e5fffd">
@@ -81,8 +92,8 @@
             <button class="btn btn-sm btn-primary" (click)="addBasicO()"><i class="fa fa-puzzle-piece"></i></button>
           </div>
           <div style="line-height:28px;">
-            <a (click)="save()">Save</a> | 
-            <a (click)="load()">Load</a>
+            <a href="#" (click)="save($event)">Save</a> | 
+            <a href="#" (click)="load($event)">Load</a>
           </div>
         </div>
       </div>

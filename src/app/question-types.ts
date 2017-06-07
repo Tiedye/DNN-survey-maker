@@ -35,3 +35,11 @@ export class DateQuestion extends AbstractQuestion {
         this.type = "date";
     }
 }
+export class HeaderQuestion extends AbstractQuestion {
+    type: 'header';
+
+    constructor(id:string = 'header', public content: string = 'A Header', public level: string = '2', condition:Condition = null) {
+        super(id, condition);
+        this.type = 'header';
+    }
+}

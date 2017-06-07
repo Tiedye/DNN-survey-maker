@@ -10,7 +10,7 @@ import { GetBlankCondition } from '../util';
 export class QuestionBlockComponent implements OnInit {
 
   @Input() question: Question;
-  @Output() deleted: EventEmitter<boolean> = new EventEmitter();
+  @Output() deleted: EventEmitter<void> = new EventEmitter<void>();
 
   constructor() { }
 
