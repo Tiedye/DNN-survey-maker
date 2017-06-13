@@ -10,7 +10,10 @@ import { GetBlankCondition } from '../util';
 export class QuestionBlockComponent implements OnInit {
 
   @Input() question: Question;
+  @Input() questionIds: string[] = [];
   @Output() deleted: EventEmitter<void> = new EventEmitter<void>();
+
+  collapsed = true;
 
   constructor() { }
 

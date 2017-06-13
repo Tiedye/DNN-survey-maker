@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, HostListener, HostBinding } from '@angular/core';
 import { OutputNode } from '../output';
 import { Question } from '../question';
 import { GetBlankCondition } from '../util';
@@ -11,10 +11,10 @@ import { GetBlankCondition } from '../util';
 export class NodeBlockComponent implements OnInit {
 
   @Input() node: OutputNode;
-  @Input() questions: Question[] = [];
+  @Input() questionIds: string[] = [];
   @Output() deleted: EventEmitter<void> = new EventEmitter<void>();
-
-  contentVisible = false;
+  
+  collapsed = true;
 
   constructor() { }
 

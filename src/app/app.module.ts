@@ -14,6 +14,8 @@ import { NodeBlockComponent } from './node-block/node-block.component';
 import { CompileService } from './compile.service';
 import { ConditionComponent } from './condition/condition.component';
 import { PageBlockComponent } from './page-block/page-block.component';
+import { DocumentPropertiesComponent } from './document-properties/document-properties.component';
+import { AutosizeDirective } from './autosize.directive';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { PageBlockComponent } from './page-block/page-block.component';
     QuestionBlockComponent,
     NodeBlockComponent,
     ConditionComponent,
-    PageBlockComponent
+    PageBlockComponent,
+    DocumentPropertiesComponent,
+    AutosizeDirective
   ],
   imports: [
     BrowserModule,

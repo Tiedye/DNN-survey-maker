@@ -12,7 +12,10 @@ import { ChoiceQuestion, DateQuestion, NumericQuestion, TextQuestion, HeaderQues
 export class PageBlockComponent implements OnInit {
 
   @Input() page: Page;
+  @Input() questionIds: string[];
   @Output() deleted: EventEmitter<void> = new EventEmitter<void>();
+
+  collapsed = true;
 
   constructor() { }
 

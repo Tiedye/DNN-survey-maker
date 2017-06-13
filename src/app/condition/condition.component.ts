@@ -17,7 +17,7 @@ const noop = () => {
 })
 export class ConditionComponent implements OnInit, ControlValueAccessor {
 
-  selectId: string;
+  @Input() questionIds:string[] = [];
   private _condition: Condition;
 
   private onTouchedCallback: () => void = noop;
@@ -52,7 +52,6 @@ export class ConditionComponent implements OnInit, ControlValueAccessor {
   constructor() { }
 
   ngOnInit() {
-    this.selectId = Math.random().toString();
   }
 
   addCondition() {

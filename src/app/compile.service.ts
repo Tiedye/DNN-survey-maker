@@ -4,13 +4,16 @@ import { OutputNode } from './output';
 import { Question } from './question';
 import { Page } from './page';
 import { ChoiceQuestion, DateQuestion, NumericQuestion, TextQuestion } from './question-types';
+import { Config } from './config';
 
 @Injectable()
 export class CompileService {
 
   constructor() { }
 
-  compile(title: string, pages: Page[], outputs: OutputNode[]) {
+  compile(config:Config) {
+    let pages = config.pages;
+    let outputs = config.outputs;
     let htmlOutput = "";
     function html(s:string) {htmlOutput+=s;}
     let styleOutput = "";
@@ -357,7 +360,7 @@ export class CompileService {
     updateNav();
 
     let outputs = new Map([${outputs.map(out => `["${out.id}", ${JSON.stringify(out)}]`).join(',')}]);
-    let order = [${outputs.filter(out => out.display).map(out => `"${out.id}"`).join(',')}];
+    let order = [${outputs.filter(out => !out.hide).map(out => `"${out.id}"`).join(',')}];
     function renderOutput() {
       let unRendered = new Set(outputs.keys());
       let rendered = new Map();

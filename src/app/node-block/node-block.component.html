@@ -1,10 +1,24 @@
-<div class="card">
+<ng-template [ngIf]="node.type == 'basic'">
+  <div class="controls">
+    <i class="fa fa-arrows"></i><br>
+    <i class="fa fa-trash-o"></i><br>
+    <i class="fa fa-ellipsis-h"></i>
+  </div>
+  <div [ngClass]="node.style"><textarea [(ngModel)]="node.content" [survAutosize]></textarea></div>
+</ng-template>
+<ng-template [ngIf]="node.type == 'group'">
+  
+</ng-template>
+<!--<div class="card">
   <a [attr.name]="node.id"></a>
   <div class="card-header handle d-flex justify-content-between" style="cursor: move">
-    <div style="pointer-events: none;"><i class="fa fa-arrows"></i></div>
-    <div><button class="btn btn-danger btn-sm" (click)="deleted.emit()"><i class="fa fa-times"></i></button></div>
+    <div style="pointer-events: none;"><i class="fa fa-arrows"></i> {{node.id}}</div>
+    <div>
+      <button class="btn btn-warning btn-sm" (click)="collapsed = !collapsed"><i class="fa" [class.fa-minus]="!collapsed" [class.fa-plus]="collapsed"></i></button> 
+      <button class="btn btn-danger btn-sm" (click)="deleted.emit()"><i class="fa fa-times"></i></button>
+    </div>
   </div>
-  <div class="card-block">
+  <div class="card-block" *ngIf="!collapsed">
 
     <div class="form-group row">
       <label class="col-md-2 col-form-label">Output ID:</label>
@@ -26,6 +40,7 @@
       </div>
     </div>
 
-    <surv-condition [(ngModel)]="node.condition"></surv-condition>
+    <surv-condition [(ngModel)]="node.condition" [questionIds]="questionIds"></surv-condition>
   </div>
 </div>
+-->

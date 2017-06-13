@@ -1,1 +1,77 @@
 /* You can add global styles to this file, and also import other style files */
+
+.output-section {
+    background: rgb(230,230,230);
+}
+
+.output-content {
+    border: 1px solid rgb(200,200,200);
+    background: white;
+    font-size: 10px;
+    padding: 6em;
+    font-family: Tahoma, Verdana, Segoe, sans-serif;
+    line-height: 1.2;
+}
+.output-content input, .output-content textarea {
+    outline: none;
+    border: none;
+    width: 100%;
+    font: inherit;
+    text-transform: inherit;
+    resize: none;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    background: none;
+}
+@media (min-width: 992px) {
+    .output-content {
+        font-size: 15px;
+    }
+}
+
+.output-content .title {
+    font-size: 2.8em;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin: 0 0 0.3em 0;
+}
+.output-content .sub_title {
+    font-size: 2.4em;
+    margin:-0.41666666666666666666666666666667em 0 0.83333333333333333333333333333333em;
+    text-transform: uppercase;
+}
+.output-content .date {
+    font-size: 1.6em;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+.output-content .answer {
+    font-weight: 900;
+}
+.output-content .yes {
+    color:#00A3D6;
+}
+.output-content .h_line {
+    margin: 1em 0;
+    border-bottom: 0.4em solid grey;
+}
+.output-content .field {
+    font-size: 2.4em;
+    margin:0 0 0.625em;
+}
+.output-content .sub_header {
+    font-size: 1.6em;
+    font-weight: 900;
+    color: #00A3D6;
+    margin: 0 0 0.625em;
+}
+.output-content .header{
+    font-size: 2.2em;
+    margin:1em 0 0.625em;
+}
+.output-content .body{
+    margin:0 0 0.625em;
+    font-size:1.4em;
+    line-height:1.3;
+}
