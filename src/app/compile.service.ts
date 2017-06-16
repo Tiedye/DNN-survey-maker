@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { OutputNode } from './output';
+import { OutputContent, OutputGroup } from './output';
 import { Question } from './question';
 import { Page } from './page';
 import { ChoiceQuestion, DateQuestion, NumericQuestion, TextQuestion } from './question-types';
@@ -71,7 +71,7 @@ export class CompileService {
               case 'header':
               return `
               ${qHead(q)}
-                <h${q.level}>${q.id}</h${q.level}>
+                <h${q.level}>${q.name}</h${q.level}>
               </div>`;
               default:
             }

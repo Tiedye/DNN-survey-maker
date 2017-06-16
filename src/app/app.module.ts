@@ -4,28 +4,28 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { DragulaModule } from 'ng2-dragula';
 import { ModalModule } from 'ngx-bootstrap/modal';
-import { FroalaViewModule, FroalaEditorModule } from 'angular2-froala-wysiwyg';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';  
 
 import { AppComponent } from './app.component';
-import { QuestionBlockComponent } from './question-block/question-block.component';
-import { NodeBlockComponent } from './node-block/node-block.component';
+import { QuestionBlockComponent } from './page-block/question-block/question-block.component';
 
 import { CompileService } from './compile.service';
+import { ConfigService } from './config.service';
 import { ConditionComponent } from './condition/condition.component';
 import { PageBlockComponent } from './page-block/page-block.component';
-import { DocumentPropertiesComponent } from './document-properties/document-properties.component';
 import { AutosizeDirective } from './autosize.directive';
+import { OutputGroupComponent } from './output-group/output-group.component';
+import { OutputContentComponent } from './output-group/output-content/output-content.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     QuestionBlockComponent,
-    NodeBlockComponent,
     ConditionComponent,
     PageBlockComponent,
-    DocumentPropertiesComponent,
-    AutosizeDirective
+    AutosizeDirective,
+    OutputGroupComponent,
+    OutputContentComponent
   ],
   imports: [
     BrowserModule,
@@ -33,11 +33,12 @@ import { AutosizeDirective } from './autosize.directive';
     HttpModule,
     DragulaModule,
     ModalModule.forRoot(),
-    FroalaEditorModule.forRoot(),
-    FroalaViewModule.forRoot(),
     ButtonsModule.forRoot()
   ],
-  providers: [CompileService],
+  providers: [
+    CompileService,
+    ConfigService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

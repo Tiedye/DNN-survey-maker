@@ -1,0 +1,7 @@
+<div class="node-handle">
+  <i class="fa fa-ellipsis-v"></i>
+</div>
+<div class="content" dragula="content-bag" [dragulaModel]="group.items">
+  <surv-output-content *ngFor="let content of group.items" [content]="content"></surv-output-content>
+</div>
+<div class="empty" *ngIf="group.items.length == 0">&lt;empty&gt;</div>

@@ -1,44 +1,44 @@
-    <ng-template [ngIf]="condition === null">
-      <div class="row">
-        <div class="col">
-          <button class="btn btn-default" (click)="addCondition()">Add Condition</button>
-        </div>
+<ng-template [ngIf]="condition === null">
+  <div class="row">
+    <div class="col">
+      <button class="btn btn-default" (click)="addCondition()">Add Condition</button>
+    </div>
+  </div>
+</ng-template>
+<ng-template [ngIf]="condition !== null">
+  <div class="form-group row">
+    <div class="col-md-4">
+      <select class="form-control" [(ngModel)]="condition.questionId">
+        <option *ngFor="let qId of configService.questionIds" [value]="qId">{{qId}}</option>
+      </select>
+    </div>
+    <div class="col-md-2">
+      <select class="form-control" [(ngModel)]="condition.comparator">
+        <option value="eq">=</option>
+        <option value="ne">&ne;</option>
+        <option value="lt">&lt;</option>
+        <option value="gt">&gt;</option>
+        <option value="lte">&le;</option>
+        <option value="gte">&ge;</option>
+        <option value="range">range</option>
+      </select>
+    </div>
+    <ng-template [ngIf]="condition.comparator === 'range'">
+      <div class="col-md-3"><input placeholder="min" type="text" class="form-control" [(ngModel)]="condition.compareMin"></div>
+      <div class="col-md-3"><input placeholder="max" type="text" class="form-control" [(ngModel)]="condition.compareMax"></div>
+    </ng-template>
+    <ng-template  [ngIf]="condition.comparator !== 'range'">
+      <div class="col-md-6">
+        <!--<div class="input-group">-->
+          <input type="text" class="form-control" [(ngModel)]="condition.compare">
+          <!--<span class="input-group-btn"><button class="btn btn-secondary" type="button"><i class="fa fa-calendar"></i></button></span>
+        </div>-->
       </div>
     </ng-template>
-    <ng-template [ngIf]="condition !== null">
-      <div class="form-group row">
-        <div class="col-md-4">
-          <select class="form-control" [(ngModel)]="condition.questionId">
-            <option *ngFor="let qId of questionIds" [value]="qId">{{qId}}</option>
-          </select>
-        </div>
-        <div class="col-md-2">
-          <select class="form-control" [(ngModel)]="condition.comparator">
-            <option value="eq">=</option>
-            <option value="ne">&ne;</option>
-            <option value="lt">&lt;</option>
-            <option value="gt">&gt;</option>
-            <option value="lte">&le;</option>
-            <option value="gte">&ge;</option>
-            <option value="range">range</option>
-          </select>
-        </div>
-        <ng-template [ngIf]="condition.comparator === 'range'">
-          <div class="col-md-3"><input placeholder="min" type="text" class="form-control" [(ngModel)]="condition.compareMin"></div>
-          <div class="col-md-3"><input placeholder="max" type="text" class="form-control" [(ngModel)]="condition.compareMax"></div>
-        </ng-template>
-        <ng-template  [ngIf]="condition.comparator !== 'range'">
-          <div class="col-md-6">
-            <!--<div class="input-group">-->
-              <input type="text" class="form-control" [(ngModel)]="condition.compare">
-              <!--<span class="input-group-btn"><button class="btn btn-secondary" type="button"><i class="fa fa-calendar"></i></button></span>
-            </div>-->
-          </div>
-        </ng-template>
-      </div>
-      <div class="row">
-        <div class="col">
-          <button class="btn btn-danger" (click)="removeCondition()">Remove Condition</button>
-        </div>
-      </div>
-    </ng-template>
+  </div>
+  <div class="row">
+    <div class="col">
+      <button class="btn btn-danger" (click)="removeCondition()">Remove Condition</button>
+    </div>
+  </div>
+</ng-template>

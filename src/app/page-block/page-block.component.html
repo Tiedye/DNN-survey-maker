@@ -29,13 +29,9 @@
           <label class="col-md-2 col-form-label">Page Title:</label>
           <div class="col-md-10"><input type="text" class="form-control" [(ngModel)]="page.title"></div>
         </div>
-        <div class="row" dragula="question-bag" style="min-height: 50px;">
-          <ng-template ngFor let-question [ngForOf]="page.questions" let-i="index">
-            <div class="col-12 pb-3" [attr.data-id]="question.id">
-              <surv-question-block [question]="question" [questionIds]="questionIds" (deleted)="page.questions.splice(i, 1)">
-              </surv-question-block>
-            </div>
-          </ng-template>
+        <div class="row" dragula="question-bag" [dragulaModel]="page.questions" style="min-height: 50px;">
+          <surv-question-block *ngFor="let question of page.questions; let i=index" class="col-12 pb-3" [attr.data-id]="question.id" [question]="question" (deleted)="page.questions.splice(i, 1)">
+          </surv-question-block>
         </div>  
       </div>
     </div>

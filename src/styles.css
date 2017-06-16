@@ -12,7 +12,7 @@
     font-family: Tahoma, Verdana, Segoe, sans-serif;
     line-height: 1.2;
 }
-.output-content input, .output-content textarea {
+.print input, .print textarea {
     outline: none;
     border: none;
     width: 100%;
@@ -30,47 +30,47 @@
     }
 }
 
-.output-content .title {
+.print .title {
     font-size: 2.8em;
     font-weight: 900;
     text-transform: uppercase;
     margin: 0 0 0.3em 0;
 }
-.output-content .sub_title {
+.print .sub_title {
     font-size: 2.4em;
     margin:-0.41666666666666666666666666666667em 0 0.83333333333333333333333333333333em;
     text-transform: uppercase;
 }
-.output-content .date {
+.print .date {
     font-size: 1.6em;
     font-weight: 900;
     text-transform: uppercase;
 }
-.output-content .answer {
+.print .answer {
     font-weight: 900;
 }
-.output-content .yes {
+.print .yes {
     color:#00A3D6;
 }
-.output-content .h_line {
+.print .h_line {
     margin: 1em 0;
     border-bottom: 0.4em solid grey;
 }
-.output-content .field {
+.print .field {
     font-size: 2.4em;
     margin:0 0 0.625em;
 }
-.output-content .sub_header {
+.print .sub_header {
     font-size: 1.6em;
     font-weight: 900;
     color: #00A3D6;
     margin: 0 0 0.625em;
 }
-.output-content .header{
+.print .header{
     font-size: 2.2em;
     margin:1em 0 0.625em;
 }
-.output-content .body{
+.print .body{
     margin:0 0 0.625em;
     font-size:1.4em;
     line-height:1.3;

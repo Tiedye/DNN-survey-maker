@@ -1,8 +1,8 @@
 import { Question } from './question';
 import { Condition } from './condition';
+import { v4 } from 'uuid';
 
-export interface Page {
-    title: string;
-    questions: Question[];
-    condition: Condition;
+export class Page {
+    id = v4();
+    constructor(public title:string = '', public questions: Question[], public condition: Condition) {}
 }

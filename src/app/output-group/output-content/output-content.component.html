@@ -1,0 +1,8 @@
+<div class="controls">
+  <i class="fa fa-arrows content-handle"></i>
+  <i class="fa fa-trash-o"></i>
+  <i class="fa fa-ellipsis-h"></i>
+</div>
+<div [ngClass]="content.style">
+  <textarea [survAutosize] [ngModel]="content.content"></textarea>
+</div>

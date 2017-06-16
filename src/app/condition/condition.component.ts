@@ -3,6 +3,7 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
 import { Condition } from '../condition';
 import { GetBlankCondition } from '../util';
+import { ConfigService } from '../config.service';
 
 const noop = () => {
 };
@@ -17,7 +18,6 @@ const noop = () => {
 })
 export class ConditionComponent implements OnInit, ControlValueAccessor {
 
-  @Input() questionIds:string[] = [];
   private _condition: Condition;
 
   private onTouchedCallback: () => void = noop;
@@ -49,7 +49,7 @@ export class ConditionComponent implements OnInit, ControlValueAccessor {
     return;
   }
 
-  constructor() { }
+  constructor(public configService: ConfigService) { }
 
   ngOnInit() {
   }

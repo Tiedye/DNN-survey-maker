@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DocumentPropertiesComponent } from './document-properties.component';
+import { OutputGroupComponent } from './output-group.component';
 
-describe('DocumentPropertiesComponent', () => {
-  let component: DocumentPropertiesComponent;
-  let fixture: ComponentFixture<DocumentPropertiesComponent>;
+describe('OutputGroupComponent', () => {
+  let component: OutputGroupComponent;
+  let fixture: ComponentFixture<OutputGroupComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DocumentPropertiesComponent ]
+      declarations: [ OutputGroupComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DocumentPropertiesComponent);
+    fixture = TestBed.createComponent(OutputGroupComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

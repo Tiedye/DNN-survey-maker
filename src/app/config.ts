@@ -1,5 +1,5 @@
 import { Page } from './page';
-import { OutputNode } from './output';
+import { OutputGroup } from './output';
 
 export interface SurveyProperties {
     title: string;
@@ -9,5 +9,6 @@ export interface SurveyProperties {
 export interface Config {
     properties: SurveyProperties;
     pages: Page[];
-    outputs: OutputNode[];
+    outputs: OutputGroup[];
 }
+

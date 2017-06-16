@@ -18,21 +18,21 @@
       <div class="col">
         <select class="form-control" (change)="navto($event.target.value)">
           <option>- PAGES -</option>
-          <option *ngFor="let page of config.pages">{{page.title}}</option>
+          <option *ngFor="let page of configService.config.pages">{{page.title}}</option>
         </select>
       </div>
       <div class="col">
         <select class="form-control" (change)="navto($event.target.value)">
           <option>- QUESTIONS -</option>
-          <ng-template ngFor let-page [ngForOf]="config.pages">
+          <ng-container *ngFor="let page of configService.config.pages">
             <option *ngFor="let question of page.questions">{{question.id}}</option>
-          </ng-template>
+          </ng-container>
         </select>
       </div>
       <div class="col">
         <select class="form-control" (change)="navto($event.target.value)">
           <option>- OUTPUTS -</option>
-          <option *ngFor="let output of config.outputs">{{output.id}}</option>
+          <option *ngFor="let output of configService.config.outputs">{{output.id}}</option>
         </select>
       </div>
     </div>
@@ -68,12 +68,12 @@
       </div>
     </div>
     <div class="row" dragula="page-bag">
-      <ng-template ngFor let-page [ngForOf]="config.pages" let-i="index">
+      <ng-container *ngFor="let page of configService.config.pages; let i=index">
         <div class="col-12 pb-3" [attr.data-id]="page.title">
-          <surv-page-block [page]="page" [questionIds]="getIds()" (deleted)="pages.splice(i, 1)">
+          <surv-page-block [page]="page" (deleted)="configService.config.pages.splice(i, 1)">
           </surv-page-block>
         </div>
-      </ng-template>
+      </ng-container>
     </div>
   </div>
 </div>
@@ -99,18 +99,18 @@
         </div>
       </div>
     </div>
-    <div class="output-content" dragula="node-bag">
-      <div class="title"><input type="text" [(ngModel)]="config.properties['title']"></div>
+    <div class="output-content print">
+      <div class="title"><input type="text" [(ngModel)]="configService.config.properties['title']"></div>
       <div class="sub_title">Results</div>
       <div class="date">Date: {{getDateString()}}</div>
       <div class="h_line"></div>
       <div class="header">Company Name: A Company</div>
       <div class="sub_header">Disclaimer</div>
       <div class="body"><textarea [(ngModel)]="disclaimerText" [survAutosize]></textarea></div>
-      <ng-container *ngFor="let node of config.outputs; let i=index" [attr.data-id]="node.id">
-        <surv-node-block [node]="node" [questionIds]="getIds()" (deleted)="outputs.splice(i, 1)">
-        </surv-node-block>
-      </ng-container>
+      <div dragula="node-bag" [dragulaModel]="configService.config.outputs">
+        <surv-output-group *ngFor="let group of configService.config.outputs; let i=index" [attr.data-id]="group.id" [group]="group" (deleted)="configService.config.outputs.splice(i, 1)">
+        </surv-output-group>
+      </div>
     </div>
   </div>
 </div>

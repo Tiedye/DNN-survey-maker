@@ -1,0 +1,33 @@
+:host {
+    position: relative;
+    display: block;
+    padding: 0 6em;
+    margin: 0 -6em;
+    border: dashed grey 0;
+    border-top-width: 1px;
+}
+:host:last-child {
+    border-bottom-width: 1px;
+}
+:host:hover {
+    background: rgb(230,230,230);
+}
+.node-handle {
+    padding: 2px 3px;
+    line-height: 1.2;
+    font-size: 20px;
+    position: absolute;
+    right: 100%;
+    border: solid grey;
+    border-radius: 5px 0 0 5px;
+    border-width: 1px 0px 1px 1px;
+}
+.node-handle * {
+    pointer-events: none;
+}
+.content {
+    min-height: 30px;
+}
+.empty {
+    color: lightgrey;
+}

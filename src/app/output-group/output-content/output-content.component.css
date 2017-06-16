@@ -4,9 +4,6 @@
     padding: 0 6em;
     margin: 0 -6em;
 }
-:host:hover {
-    background: rgb(230,230,230);
-}
 :host:hover .controls {
     visibility: visible;
 }
@@ -15,7 +12,6 @@
     visibility: hidden;
     font-size: 1rem;
     position: absolute;
-    left: 0;
-    width: 2rem;
-    text-align: center;
+    left: calc(100% - 6rem);
+    text-align: right;
 }

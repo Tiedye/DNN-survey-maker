@@ -1,27 +1,21 @@
 import { Condition } from './condition';
 import { GetBlankCondition } from './util';
+import { v4 } from 'uuid';
 
-export type OutputNode = BasicOutput | OutputGroup;
-
-export class BasicOutput {
-    type: 'basic';
+export class OutputContent {
+    id:string = v4();
     constructor(
-        public id:string = 'basic',
         public content: string = '',
         public style: string = '',
-        public hide: boolean = false,
-        public condition: Condition = null) {
-        this.type = 'basic';
+        public hide: boolean = false) {
     }
 }
 
 export class OutputGroup {
-    type: 'group';
+    id:string = v4();
     constructor(
-        public id:string = 'group',
-        public items:OutputNode[] = [],
+        public items:OutputContent[] = [],
         public hide:boolean = false,
         public condition: Condition = null) {
-        this.type = 'group';
     }
 }
