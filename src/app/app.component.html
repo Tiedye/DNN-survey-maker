@@ -87,9 +87,17 @@
       <div class="col">
         <div class="card">
           <div class="card-block d-flex justify-content-between">
-            <div class="mr-auto">
-              <span class="btn btn-sm btn-outline"><i class="fa fa-plus"></i></span>
-              <button class="btn btn-sm btn-primary" (click)="addBasicO()"><i class="fa fa-puzzle-piece"></i></button>
+            <div class="d-flex toolbox-container">
+              <div class="btn btn-sm btn-outline"><i class="fa fa-plus"></i></div>
+              <div class="toolbox" dragula="node-bag" [dragulaModel]="configService.defaultOutput">
+                <surv-output-group class="tbi" *ngFor="let group of configService.defaultOutput; let i=index" [group]="group">
+                </surv-output-group>
+              </div>
+              <div class="toolbox" dragula="content-bag" [dragulaModel]="configService.defaultContent">
+                <surv-output-content class="tbi" *ngFor="let content of configService.defaultContent; let i=index" [content]="content">
+                </surv-output-content>
+              </div>
+              <!--<button class="btn btn-sm btn-primary" (click)="addBasicO()"><i class="fa fa-puzzle-piece"></i></button>-->
             </div>
             <div style="line-height:28px;">
               <a href="#" (click)="save(); false">Save</a> | 
@@ -107,7 +115,7 @@
       <div class="header">Company Name: A Company</div>
       <div class="sub_header">Disclaimer</div>
       <div class="body"><textarea [(ngModel)]="disclaimerText" [survAutosize]></textarea></div>
-      <div dragula="node-bag" [dragulaModel]="configService.config.outputs">
+      <div dragula="node-bag" [dragulaModel]="configService.config.outputs" class="node-area">
         <surv-output-group *ngFor="let group of configService.config.outputs; let i=index" [attr.data-id]="group.id" [group]="group" (deleted)="configService.config.outputs.splice(i, 1)">
         </surv-output-group>
       </div>

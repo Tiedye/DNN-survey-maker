@@ -1,8 +1,11 @@
 <div class="controls">
   <i class="fa fa-arrows content-handle"></i>
-  <i class="fa fa-trash-o"></i>
+  <i (click)="deleted.emit(true)" class="fa fa-trash-o"></i>
   <i class="fa fa-ellipsis-h"></i>
 </div>
 <div [ngClass]="content.style">
-  <textarea [survAutosize] [ngModel]="content.content"></textarea>
+  <textarea #inputArea [survAutosize] [(ngModel)]="content.content" (keydown)="handleKey($event)"></textarea>
+</div>
+<div class="icon content-handle">
+  <span class="btn btn-sm btn-primary"><i class="fa fa-font"></i></span>
 </div>

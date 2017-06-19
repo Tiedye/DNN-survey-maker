@@ -12,15 +12,23 @@
 :host:hover {
     background: rgb(230,230,230);
 }
-.node-handle {
+.handle {
     padding: 2px 3px;
-    line-height: 1.2;
+    line-height: 24px;
     font-size: 20px;
     position: absolute;
     right: 100%;
     border: solid grey;
     border-radius: 5px 0 0 5px;
     border-width: 1px 0px 1px 1px;
+}
+.controls {
+    padding: 2px 3px;
+    line-height: 24px;
+    font-size: 14px;
+    position: absolute;
+    left: 0;
+    z-index: 1;
 }
 .node-handle * {
     pointer-events: none;
@@ -29,5 +37,56 @@
     min-height: 30px;
 }
 .empty {
+    position: absolute;
+    top: 0;
     color: lightgrey;
+    line-height: 30px;
+    pointer-events: none;
+}
+
+.icon {
+    display: none;
+}
+.icon .btn {
+    display: block !important;
+}
+
+:host-context(.toolbox) {
+    padding: initial;
+    margin: initial;
+    position: initial;
+    display: initial;
+    border: initial;
+}
+:host-context(.toolbox):hover {
+    background: initial;
+}
+:host-context(.toolbox) :not(.icon) {
+    display: none;
+}
+:host-context(.toolbox) .icon {
+    display: block;
+}
+:host-context(.toolbox) .icon * {
+    display: initial;
+}
+
+:host(.tbi.gu-mirror) {
+    padding: initial;
+    margin: initial;
+    position: initial;
+    display: initial;
+    border: initial;
+}
+:host(.tbi.gu-mirror):hover {
+    background: initial;
+}
+:host(.tbi.gu-mirror) :not(.icon) {
+    display: none;
+}
+:host(.tbi.gu-mirror) .icon {
+    display: block;
+}
+:host(.tbi.gu-mirror) .icon * {
+    display: initial;
 }

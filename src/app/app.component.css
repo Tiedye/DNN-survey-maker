@@ -14,6 +14,12 @@
     border-top: 1px solid lightgrey;
 }
 
+.node-area {
+    min-height: 30px;
+}
+.toolbox-container > * {
+    margin-right: 5px; 
+}
  /*       page_footer:{
             margin:[60,0,60,0]
         },

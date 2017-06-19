@@ -15,3 +15,50 @@
     left: calc(100% - 6rem);
     text-align: right;
 }
+.content-handle * {
+    pointer-events: none;
+}
+
+:host(.tbi) {
+    background: rgb(140,140,200);
+}
+
+.icon {
+    display: none;
+}
+.icon .btn {
+    display: block !important;
+}
+
+:host-context(.toolbox) {
+    padding: initial;
+    margin: initial;
+    position: initial;
+    display: initial;
+    border: initial;
+}
+:host-context(.toolbox) :not(.icon) {
+    display: none;
+}
+:host-context(.toolbox) .icon {
+    display: block;
+}
+:host-context(.toolbox) .icon * {
+    display: initial;
+}
+:host(.tbi.gu-mirror) {
+    padding: initial;
+    margin: initial;
+    position: initial;
+    display: initial;
+    border: initial;
+}
+:host(.tbi.gu-mirror) :not(.icon) {
+    display: none;
+}
+:host(.tbi.gu-mirror) .icon {
+    display: block;
+}
+:host(.tbi.gu-mirror) .icon * {
+    display: initial;
+}

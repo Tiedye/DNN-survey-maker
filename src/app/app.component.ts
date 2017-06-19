@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit, ChangeDetectorRef, HostListener } from '@angular/core';
+import { Component, ViewChild, OnInit, HostListener } from '@angular/core';
 import { DragulaService } from 'ng2-dragula';
 import { Observable } from 'rxjs/Observable';
 import { timer } from 'rxjs/Observable/timer';
@@ -25,11 +25,13 @@ export class AppComponent implements OnInit {
   outStyle: string;
   outHTML: string;
 
+  ogrp = new OutputGroup([new OutputContent('', 'body')]);
+
   @ViewChild('loadFileSelection') loader;
   @ViewChild('outputElement') outElem;
-  
-  @HostListener('document:keydown', ['$event']) onkeydown(event:KeyboardEvent) {
-    if(event.ctrlKey) {
+
+  @HostListener('document:keydown', ['$event']) onkeydown(event: KeyboardEvent) {
+    if (event.ctrlKey) {
       switch (event.key) {
         case 's':
           this.save();
@@ -37,16 +39,11 @@ export class AppComponent implements OnInit {
       }
     }
   }
-  
-  constructor(private dragulaService: DragulaService, private compileService: CompileService, private changeDetectorRef:ChangeDetectorRef, public configService: ConfigService) {
+
+  constructor(private dragulaService: DragulaService, private compileService: CompileService, public configService: ConfigService) {
     dragulaService.setOptions('page-bag', {
       moves: (el, container, handle) => {
         return handle.classList.contains('page-handle');
-      }
-    });
-    dragulaService.setOptions('node-bag', {
-      moves: (el, container, handle) => {
-        return handle.classList.contains('node-handle');
       }
     });
     dragulaService.setOptions('question-bag', {
@@ -54,6 +51,30 @@ export class AppComponent implements OnInit {
         return handle.classList.contains('handle');
       }
     });
+    dragulaService.setOptions('node-bag', {
+      moves: (el, container, handle) => {
+        return handle.classList.contains('node-handle');
+      },
+      copy: (el, container) => {
+        return container.classList.contains('toolbox');
+      },
+      accepts: (el, container) => {
+        return !container.classList.contains('toolbox');
+      }
+    });
+    dragulaService.setOptions('content-bag', {
+      moves: (el, container, handle) => {
+        return handle.classList.contains('content-handle');
+      },
+      copy: (el, container) => {
+        return container.classList.contains('toolbox');
+      },
+      accepts: (el, container) => {
+        return !container.classList.contains('toolbox');
+      }
+    });
+    dragulaService.find('node-bag').drake.on('drop', () => {this.configService.renew()});
+    dragulaService.find('content-bag').drake.on('drop', () => {this.configService.renew()});
     this.uuid = v4();
   }
 

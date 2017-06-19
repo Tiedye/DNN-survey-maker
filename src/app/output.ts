@@ -3,19 +3,21 @@ import { GetBlankCondition } from './util';
 import { v4 } from 'uuid';
 
 export class OutputContent {
-    id:string = v4();
     constructor(
         public content: string = '',
         public style: string = '',
-        public hide: boolean = false) {
+        public hide: boolean = false,
+        public id: string = v4()) {
     }
+    regenId() { this.id = v4(); }
 }
 
 export class OutputGroup {
-    id:string = v4();
     constructor(
-        public items:OutputContent[] = [],
-        public hide:boolean = false,
-        public condition: Condition = null) {
+        public items: OutputContent[] = [],
+        public hide: boolean = false,
+        public condition: Condition = null,
+        public id: string = v4()) {
     }
+    regenId() { this.id = v4(); }
 }

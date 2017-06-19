@@ -11,6 +11,7 @@ import { QuestionBlockComponent } from './page-block/question-block/question-blo
 
 import { CompileService } from './compile.service';
 import { ConfigService } from './config.service';
+import { FocusService } from './focus.service';
 import { ConditionComponent } from './condition/condition.component';
 import { PageBlockComponent } from './page-block/page-block.component';
 import { AutosizeDirective } from './autosize.directive';
@@ -37,7 +38,8 @@ import { OutputContentComponent } from './output-group/output-content/output-con
   ],
   providers: [
     CompileService,
-    ConfigService
+    ConfigService,
+    FocusService
   ],
   bootstrap: [AppComponent]
 })

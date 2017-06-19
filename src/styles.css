@@ -7,10 +7,12 @@
 .output-content {
     border: 1px solid rgb(200,200,200);
     background: white;
-    font-size: 10px;
     padding: 6em;
     font-family: Tahoma, Verdana, Segoe, sans-serif;
+}
+.print {
     line-height: 1.2;
+    font-size: 10px;
 }
 .print input, .print textarea {
     outline: none;
@@ -25,7 +27,7 @@
     background: none;
 }
 @media (min-width: 992px) {
-    .output-content {
+    .print {
         font-size: 15px;
     }
 }
@@ -34,11 +36,11 @@
     font-size: 2.8em;
     font-weight: 900;
     text-transform: uppercase;
-    margin: 0 0 0.3em 0;
+    padding: 0 0 0.3em 0;
 }
 .print .sub_title {
     font-size: 2.4em;
-    margin:-0.41666666666666666666666666666667em 0 0.83333333333333333333333333333333em;
+    padding:-0.41666666666666666666666666666667em 0 0.83333333333333333333333333333333em;
     text-transform: uppercase;
 }
 .print .date {
@@ -53,25 +55,25 @@
     color:#00A3D6;
 }
 .print .h_line {
-    margin: 1em 0;
+    padding: 1em 0;
     border-bottom: 0.4em solid grey;
 }
 .print .field {
     font-size: 2.4em;
-    margin:0 0 0.625em;
+    padding:0 0 0.625em;
 }
 .print .sub_header {
     font-size: 1.6em;
     font-weight: 900;
     color: #00A3D6;
-    margin: 0 0 0.625em;
+    padding: 0 0 0.625em;
 }
 .print .header{
     font-size: 2.2em;
-    margin:1em 0 0.625em;
+    padding:1em 0 0.625em;
 }
 .print .body{
-    margin:0 0 0.625em;
+    padding:0 0 0.625em;
     font-size:1.4em;
     line-height:1.3;
 }

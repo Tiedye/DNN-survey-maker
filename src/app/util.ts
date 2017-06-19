@@ -6,5 +6,5 @@ export function GetBlankCondition(): Condition {
 }
 
 export function GetBlankPage(): Page {
-    return {condition: null, questions: [], title: ""};
+    return new Page();
 }

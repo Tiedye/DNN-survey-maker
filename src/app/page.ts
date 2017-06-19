@@ -4,5 +4,5 @@ import { v4 } from 'uuid';
 
 export class Page {
     id = v4();
-    constructor(public title:string = '', public questions: Question[], public condition: Condition) {}
+    constructor(public title:string = '', public questions: Question[] = [], public condition: Condition = null) {}
 }
