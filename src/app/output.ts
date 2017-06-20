@@ -15,6 +15,7 @@ export class OutputContent {
 export class OutputGroup {
     constructor(
         public items: OutputContent[] = [],
+        public pageBreak: boolean = false,
         public hide: boolean = false,
         public condition: Condition = null,
         public id: string = v4()) {

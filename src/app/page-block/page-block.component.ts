@@ -29,38 +29,27 @@ export class PageBlockComponent implements OnInit {
   }
 
   addChoiceQ(): void {
-    const prefix = 'choice';
-    let n = 1;
-    while (document.querySelector(`*[data-id=${prefix+n}]`)) {++n;}
-    this.page.questions.push(new ChoiceQuestion(prefix + n));
+    this.page.questions.push(new ChoiceQuestion());
   }
 
   addTextQ(): void {
-    const prefix = 'text';
-    let n = 1;
-    while (document.querySelector(`*[data-id=${prefix+n}]`)) {++n;}
-    this.page.questions.push(new TextQuestion(prefix + n));
+    this.page.questions.push(new TextQuestion());
   }
 
   addNumberQ(): void {
-    const prefix = 'number';
-    let n = 1;
-    while (document.querySelector(`*[data-id=${prefix+n}]`)) {++n;}
-    this.page.questions.push(new NumericQuestion(prefix + n));
+    this.page.questions.push(new NumericQuestion());
   }
 
   addDateQ(): void {
-    const prefix = 'date';
-    let n = 1;
-    while (document.querySelector(`*[data-id=${prefix+n}]`)) {++n;}
-    this.page.questions.push(new DateQuestion(prefix + n));
+    this.page.questions.push(new DateQuestion());
   }
 
   addHeaderQ(): void {
-    const prefix = 'header';
-    let n = 1;
-    while (document.querySelector(`*[data-id=${prefix+n}]`)) {++n;}
-    this.page.questions.push(new HeaderQuestion(prefix + n));
+    this.page.questions.push(new HeaderQuestion());
+  }
+
+  @Input() set toggle(v) {
+    console.log(v);
   }
 
 }

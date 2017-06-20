@@ -4,14 +4,15 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { DragulaModule } from 'ng2-dragula';
 import { ModalModule } from 'ngx-bootstrap/modal';
-import { ButtonsModule } from 'ngx-bootstrap/buttons';  
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
+import { TooltipModule } from 'ngx-better-tooltip';
 
 import { AppComponent } from './app.component';
 import { QuestionBlockComponent } from './page-block/question-block/question-block.component';
 
 import { CompileService } from './compile.service';
 import { ConfigService } from './config.service';
-import { FocusService } from './focus.service';
+import { TextService } from './text.service';
 import { ConditionComponent } from './condition/condition.component';
 import { PageBlockComponent } from './page-block/page-block.component';
 import { AutosizeDirective } from './autosize.directive';
@@ -34,12 +35,13 @@ import { OutputContentComponent } from './output-group/output-content/output-con
     HttpModule,
     DragulaModule,
     ModalModule.forRoot(),
-    ButtonsModule.forRoot()
+    ButtonsModule.forRoot(),
+    TooltipModule
   ],
   providers: [
     CompileService,
     ConfigService,
-    FocusService
+    TextService
   ],
   bootstrap: [AppComponent]
 })

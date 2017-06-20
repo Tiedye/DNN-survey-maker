@@ -4,7 +4,7 @@ import { Question } from '../question';
 import { GetBlankCondition } from '../util';
 import { v4 } from 'uuid';
 import { OutputContentComponent } from './output-content/output-content.component';
-import { FocusService } from '../focus.service';
+import { TextService } from '../text.service';
 
 @Component({
   selector: 'surv-output-group',
@@ -21,7 +21,7 @@ export class OutputGroupComponent implements OnInit {
   @Input() group: OutputGroup;
   @Output() deleted: EventEmitter<void> = new EventEmitter<void>();
 
-  constructor(private focusService: FocusService) { }
+  constructor(private focusService: TextService) { }
 
   ngOnInit() { }
 
@@ -44,6 +44,12 @@ export class OutputGroupComponent implements OnInit {
       if (i > 0 && !hard) {
         this.focusService.focus(this.group.items[i - 1].id);
       }
+    }
+  }
+
+  navigate(i: number, end: boolean) {
+    if (i >= 0 && i < this.group.items.length) {
+      this.focusService.focus(this.group.items[i].id, end);
     }
   }
 }

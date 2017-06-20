@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit, Input, Output, EventEmitter, ViewChild, OnDestroy } from '@angular/core';
 import { OutputContent } from '../../output';
-import { FocusService } from '../../focus.service';
+import { TextService } from '../../text.service';
+import { ConfigService } from '../../config.service';
 import { Subscription } from 'rxjs/Subscription';
 
 @Component({
@@ -19,24 +20,41 @@ export class OutputContentComponent implements OnInit, AfterViewInit, OnDestroy 
   @Input() content: OutputContent;
   @Output() deleted = new EventEmitter<boolean>();
   @Output() split = new EventEmitter<void>();
+  @Output() navigatePrev = new EventEmitter<void>();
+  @Output() navigateNext = new EventEmitter<void>();
 
   private deleteNext = false;
   private focusedElementSub: Subscription;
+  private inserterSub: Subscription;
+  private focused = false;
 
-  constructor(private focusService: FocusService) { }
+  constructor(private textService: TextService, public configService: ConfigService) { }
 
   ngOnInit() { }
 
   ngAfterViewInit() {
-    this.focusedElementSub = this.focusService.focusedElement.subscribe(v => {
-      if (v === this.content.id) {
-        setTimeout(() => this.focus(), 0);
+    this.focusedElementSub = this.textService.focusedElement.subscribe(v => {
+      if (v.id === this.content.id) {
+        this.focused = true;
+        if (this.inputArea.nativeElement !== document.activeElement) {
+          setTimeout(() => this.focus(v.end), 0);
+        }
+      } else {
+        this.focused = false;
+      }
+    });
+    this.inserterSub = this.textService.toInsert.subscribe(v => {
+      if (this.focused) {
+        const ss = this.inputArea.nativeElement.selectionStart;
+        this.content.content = this.content.content.substring(0, ss) + v + this.content.content.substring(ss);
+        this.inputArea.nativeElement.selectionStart = this.inputArea.nativeElement.selectionEnd = ss + v.length;
       }
     });
   }
 
   ngOnDestroy() {
     this.focusedElementSub.unsubscribe();
+    this.inserterSub.unsubscribe();
   }
 
   handleKey(e: KeyboardEvent) {
@@ -52,11 +70,34 @@ export class OutputContentComponent implements OnInit, AfterViewInit, OnDestroy 
       case 'Tab':
         this.content.content += '\t';
         return false;
+      case 'ArrowUp':
+      case 'ArrowLeft': {
+        const t = <HTMLTextAreaElement>this.inputArea.nativeElement;
+        if (t.selectionStart === 0) {
+          this.navigatePrev.emit();
+        }
+        return;
+      }
+      case 'ArrowDown':
+      case 'ArrowRight': {
+        const t = <HTMLTextAreaElement>this.inputArea.nativeElement;
+        if (t.selectionStart === t.value.length) {
+          this.navigateNext.emit();
+        }
+        return;
+      }
     }
   }
 
-  focus() {
+  focus(end: boolean = false) {
     this.inputArea.nativeElement.focus();
+    if (end) {
+      this.inputArea.nativeElement.selectionStart = this.inputArea.nativeElement.selectionEnd = this.inputArea.nativeElement.value.length;
+    }
+  }
+
+  setFocus() {
+    this.textService.focus(this.content.id);
   }
 
 }

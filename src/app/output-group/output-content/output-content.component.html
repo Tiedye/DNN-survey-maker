@@ -1,10 +1,19 @@
 <div class="controls">
   <i class="fa fa-arrows content-handle"></i>
   <i (click)="deleted.emit(true)" class="fa fa-trash-o"></i>
-  <i class="fa fa-ellipsis-h"></i>
+  <tooltip-wrapper direction="left">
+    <tooltip-target>
+      <i class="fa fa-ellipsis-h"></i>
+    </tooltip-target>
+    <tooltip-content>
+      <select style="width: 150px;" class="form-control" [(ngModel)]="content.style">
+        <option *ngFor="let style of configService.styles" [value]="style.class">{{style.name}}</option>
+      </select>
+    </tooltip-content>
+  </tooltip-wrapper>
 </div>
 <div [ngClass]="content.style">
-  <textarea #inputArea [survAutosize] [(ngModel)]="content.content" (keydown)="handleKey($event)"></textarea>
+  <textarea class="wysiwyg" #inputArea [survAutosize] [(ngModel)]="content.content" (focus)="setFocus()" (keydown)="handleKey($event)"></textarea>
 </div>
 <div class="icon content-handle">
   <span class="btn btn-sm btn-primary"><i class="fa fa-font"></i></span>

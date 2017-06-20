@@ -1,5 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
 .output-section {
     background: rgb(230,230,230);
 }
@@ -14,7 +24,8 @@
     line-height: 1.2;
     font-size: 10px;
 }
-.print input, .print textarea {
+.print input.wysiwyg, .print textarea.wysiwyg {
+    color: inherit;
     outline: none;
     border: none;
     width: 100%;

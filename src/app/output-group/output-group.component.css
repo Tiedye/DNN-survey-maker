@@ -90,3 +90,13 @@
 :host(.tbi.gu-mirror) .icon * {
     display: initial;
 }
+
+.condition {
+    width: 50vw;
+}
+
+@media (min-width: 768px) {
+    .condition {
+        width: 500px;
+    }
+}

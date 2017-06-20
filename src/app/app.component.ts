@@ -11,6 +11,8 @@ import { Config } from './config';
 import { GetBlankPage, GetBlankCondition } from './util';
 import { v4 } from 'uuid';
 import { ConfigService } from './config.service';
+import { TextService } from './text.service';
+import { TooltipComponent } from 'ngx-better-tooltip';
 
 @Component({
   selector: 'surv-root',
@@ -18,6 +20,7 @@ import { ConfigService } from './config.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+  confirm = confirm;
 
   uuid: string;
 
@@ -25,8 +28,13 @@ export class AppComponent implements OnInit {
   outStyle: string;
   outHTML: string;
 
+  insertTag = '';
+  insertId = '';
+
   ogrp = new OutputGroup([new OutputContent('', 'body')]);
 
+  @ViewChild('styleTagInserter') styleTagInserter: TooltipComponent;
+  @ViewChild('valueTagInserter') valueTagInserter: TooltipComponent;
   @ViewChild('loadFileSelection') loader;
   @ViewChild('outputElement') outElem;
 
@@ -40,7 +48,7 @@ export class AppComponent implements OnInit {
     }
   }
 
-  constructor(private dragulaService: DragulaService, private compileService: CompileService, public configService: ConfigService) {
+  constructor(private dragulaService: DragulaService, private compileService: CompileService, public configService: ConfigService, private textService: TextService) {
     dragulaService.setOptions('page-bag', {
       moves: (el, container, handle) => {
         return handle.classList.contains('page-handle');
@@ -78,15 +86,15 @@ export class AppComponent implements OnInit {
     this.uuid = v4();
   }
 
-  ngOnInit():void {
+  ngOnInit(): void {
   }
 
   navto(id: string): void {
     if (id.startsWith('-')) { return; }
-    let bodyRect = document.body.getBoundingClientRect(),
-    elemRect = document.querySelector(`*[data-id="${id}"]`).getBoundingClientRect(),
-    offset   = elemRect.top - bodyRect.top;
-    scroll(0, offset - 80);
+    const bodyRect = document.body.getBoundingClientRect(),
+          elemRect = document.querySelector(`*[data-id="${id}"]`).getBoundingClientRect(),
+          offset   = elemRect.top - bodyRect.top;
+    scroll(0, offset - 140);
   }
 
   addPage(): void {
@@ -126,16 +134,31 @@ export class AppComponent implements OnInit {
 
     myReader.readAsText(file);
   }
+
+  insertStyle() {
+    this.textService.insert(`#s:${this.insertTag}:`);
+    this.styleTagInserter.close();
+  }
+
+  insertValue() {
+    this.textService.insert(`#v:${this.insertId}:`);
+    this.valueTagInserter.close();
+  }
+
   getDateString() {
-    let d = new Date();
+    const d = new Date();
     return `${d.getFullYear()}/${d.getMonth()}/${d.getDate()}`;
   }
 
-  get disclaimerText():string {
+  get disclaimerText(): string {
     return this.configService.config.properties.disclaimer.join('\n\n');
   }
-  set disclaimerText(text:string) {
+  set disclaimerText(text: string) {
     this.configService.config.properties.disclaimer = text.split('\n\n');
+  }
+
+  trackById(i, obj) {
+    return obj.id;
   }
 
 }

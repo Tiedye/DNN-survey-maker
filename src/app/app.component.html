@@ -22,10 +22,10 @@
         </select>
       </div>
       <div class="col">
-        <select class="form-control" (change)="navto($event.target.value)">
-          <option>- QUESTIONS -</option>
+        <select class="form-control" [ngModel]="['null']" (ngModelChange)="navto($event); false">
+          <option value="null">- QUESTIONS -</option>
           <ng-container *ngFor="let page of configService.config.pages">
-            <option *ngFor="let question of page.questions">{{question.id}}</option>
+            <option *ngFor="let question of page.questions" [value]="question.id">{{question.name}}</option>
           </ng-container>
         </select>
       </div>
@@ -90,14 +90,51 @@
             <div class="d-flex toolbox-container">
               <div class="btn btn-sm btn-outline"><i class="fa fa-plus"></i></div>
               <div class="toolbox" dragula="node-bag" [dragulaModel]="configService.defaultOutput">
-                <surv-output-group class="tbi" *ngFor="let group of configService.defaultOutput; let i=index" [group]="group">
+                <surv-output-group class="tbi" *ngFor="let group of configService.defaultOutput; let i=index; trackBy: trackById" [group]="group">
                 </surv-output-group>
               </div>
               <div class="toolbox" dragula="content-bag" [dragulaModel]="configService.defaultContent">
-                <surv-output-content class="tbi" *ngFor="let content of configService.defaultContent; let i=index" [content]="content">
+                <surv-output-content class="tbi" *ngFor="let content of configService.defaultContent; let i=index; trackBy: trackById" [content]="content">
                 </surv-output-content>
               </div>
-              <!--<button class="btn btn-sm btn-primary" (click)="addBasicO()"><i class="fa fa-puzzle-piece"></i></button>-->
+              <div class="px-2"></div>
+
+              <tooltip-wrapper [toggle]="true" direction="bottom" #styleTagInserter>
+                <tooltip-target>
+                  <button class="btn btn-sm btn-primary"><i class="fa fa-hashtag"></i></button>
+                </tooltip-target>
+                <tooltip-content>
+                  <div style="width: 300px">
+                    <div class="form-group">
+                      <select class="form-control" [(ngModel)]="insertTag">
+                        <option *ngFor="let style of configService.styles" [value]="style.class">{{style.name}}</option>
+                      </select>
+                    </div>
+                    <div class="form-group mb-0">
+                      <button class="btn btn-primary" (click)="insertStyle()">Insert</button>
+                    </div>
+                  </div>
+                </tooltip-content>
+              </tooltip-wrapper>
+
+              <tooltip-wrapper [toggle]="true" direction="bottom" #valueTagInserter>
+                <tooltip-target>
+                  <button class="btn btn-sm btn-primary"><i class="fa fa-at"></i></button>
+                </tooltip-target>
+                <tooltip-content>
+                  <div style="width: 300px">
+                    <div class="form-group">
+                      <select class="form-control" [(ngModel)]="insertId">
+                        <option *ngFor="let question of configService.questions" [value]="question.id">{{question.name}}</option>
+                      </select>
+                    </div>
+                    <div class="form-group mb-0">
+                      <button class="btn btn-primary" (click)="insertValue()">Insert</button>
+                    </div>
+                  </div>
+                </tooltip-content>
+              </tooltip-wrapper>
+
             </div>
             <div style="line-height:28px;">
               <a href="#" (click)="save(); false">Save</a> | 
@@ -108,15 +145,15 @@
       </div>
     </div>
     <div class="output-content print">
-      <div class="title"><input type="text" [(ngModel)]="configService.config.properties['title']"></div>
+      <div class="title"><input class="wysiwyg" type="text" [(ngModel)]="configService.config.properties['title']"></div>
       <div class="sub_title">Results</div>
       <div class="date">Date: {{getDateString()}}</div>
       <div class="h_line"></div>
       <div class="header">Company Name: A Company</div>
       <div class="sub_header">Disclaimer</div>
-      <div class="body"><textarea [(ngModel)]="disclaimerText" [survAutosize]></textarea></div>
+      <div class="body"><textarea class="wysiwyg" [(ngModel)]="disclaimerText" [survAutosize]></textarea></div>
       <div dragula="node-bag" [dragulaModel]="configService.config.outputs" class="node-area">
-        <surv-output-group *ngFor="let group of configService.config.outputs; let i=index" [attr.data-id]="group.id" [group]="group" (deleted)="configService.config.outputs.splice(i, 1)">
+        <surv-output-group *ngFor="let group of configService.config.outputs; let i=index; trackBy: trackById" [group]="group" (deleted)="confirm('Are you sure?') && configService.config.outputs.splice(i, 1)">
         </surv-output-group>
       </div>
     </div>

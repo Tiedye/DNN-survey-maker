@@ -1,6 +1,6 @@
-<div class="card">
+<div class="card" [attr.data-id]="question.id">
   <div class="card-header handle d-flex justify-content-between" style="cursor: move">
-    <div style="pointer-events: none;"><i class="fa fa-arrows"></i> {{question.id}}</div>
+    <div style="pointer-events: none;"><i class="fa fa-arrows"></i> {{question.name}}</div>
     <div>
       <button class="btn btn-warning btn-sm" (click)="collapsed = !collapsed"><i class="fa" [class.fa-minus]="!collapsed" [class.fa-plus]="collapsed"></i></button> 
       <button class="btn btn-danger btn-sm" (click)="deleted.emit()"><i class="fa fa-times"></i></button>
@@ -11,7 +11,7 @@
     <ng-template [ngIf]="question.type === 'header'">
       <div class="form-group row">
         <label class="col-md-2 col-form-label">Header:</label>
-        <div class="col-md-10"><input type="text" class="form-control" [(ngModel)]="question.content"></div>
+        <div class="col-md-10"><input type="text" class="form-control" [(ngModel)]="question.name"></div>
       </div>   
       <div class="form-group row">
         <label class="col-md-2 col-form-label">Level:</label>
@@ -31,19 +31,19 @@
 
     <ng-template [ngIf]="question.type !== 'header'">
 
-      <div class="form-group row">
-        <label class="col-md-2 col-form-label">Question Text:</label>
+      <div class="form-group row text-md-right">
+        <label class="col-md-2 col-form-label">Question</label>
         <div class="col-md-10"><input type="text" class="form-control" [(ngModel)]="question.question"></div>
       </div>
-      <div class="form-group row">
-        <label class="col-md-2 col-form-label">Question ID:</label>
-        <div class="col-md-10"><input type="text" class="form-control" [(ngModel)]="question.id"></div>
+      <div class="form-group row text-md-right">
+        <label class="col-md-2 col-form-label">Name</label>
+        <div class="col-md-10"><input type="text" class="form-control" [(ngModel)]="question.name"></div>
       </div>
 
 
       <ng-template [ngIf]="question.type === 'choice'">
         <div class="row">
-          <div class="col">Name</div>
+          <div class="col">Option</div>
           <div class="col col-md-4">Value</div>
           <div class="col col-auto text-right">
             <button class="btn btn-sm null-btn"><i class="fa fa-circle-o"></i></button>

@@ -1,11 +1,22 @@
 <div class="handle node-handle">
   <i class="fa fa-ellipsis-v"></i>
 </div>
-<div class="controls">
-  <i (click)="deleted.emit()" class="fa fa-trash-o"></i>
+<div class="controls noselect">
+  <i (click)="deleted.emit()" class="fa fa-trash-o" style="cursor: pointer"></i>
+  <tooltip-wrapper [toggle]="true" direction="right" toggle>
+    <tooltip-target>
+      <i class="fa fa-asterisk" style="cursor: pointer"></i>
+    </tooltip-target>
+    <tooltip-content>
+      <div class="condition">
+        <surv-condition [(ngModel)]="group.condition"></surv-condition>
+      </div>
+    </tooltip-content>
+  </tooltip-wrapper>
+  <i class="fa" [class.fa-link]="!group.pageBreak" [class.fa-unlink]="group.pageBreak" (click)="group.pageBreak = !group.pageBreak"  style="cursor: pointer"></i>
 </div>
 <div class="content" dragula="content-bag" [dragulaModel]="group.items">
-  <surv-output-content *ngFor="let content of group.items; let i=index" [content]="content" (deleted)="delete($event, i)" (split)="split(i)"></surv-output-content>
+  <surv-output-content *ngFor="let content of group.items; let i=index" [content]="content" (deleted)="delete($event, i)" (split)="split(i)" (navigatePrev)="navigate(i-1, true)" (navigateNext)="navigate(i+1, false)"></surv-output-content>
 </div>
 <div class="empty" *ngIf="group.items.length == 0">&lt;empty&gt;</div>
 <div class="icon node-handle">
